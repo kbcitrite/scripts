@@ -5,8 +5,6 @@ __Citrix Application Delivery Management Powershell Modu1e__
     - [Connect-ADM](#connect-adm)
     - [Disconnect-ADM](#disconnect-adm)
     - [Invoke-ADMNitro](#invoke-admnitro)
-+ [Utility Scripts](#samples)
-    - [Sample.ps1](#sample1)
 <a name="intro"></a>
 ## Module Introduction
 Citrix's Application Delivery Management (ADM) product is a linux-based Virtual appliance that serves as a centralized configuration management and analytics system for monitoring, analyzing, and maintaining Citrix Application Delivery Controllers (ADCs), which are formerly known as NetScalers.

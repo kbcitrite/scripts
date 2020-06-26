@@ -1,4 +1,4 @@
-__Citrix Application Delivery Management Powershell Modu1e__
+__Citrix Application Delivery Management Powershell Module__
 ## Contents
 + [Introduction](#ingro)
 + [External Module Functions](#emf)

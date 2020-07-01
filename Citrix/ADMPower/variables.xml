@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "inputfile.dtd"[]>
+<properties>
+    <global>
+        <param name="name" value="value" />
+    </global>
+    <device name="192.168.86.11">
+        <param name="hostname" value="adc1"/>
+        <param name="nsip" value="192.168.86.11"/>        
+        <param name="datacenter" value="dc1"/>
+        <param name="group" value="group1"/>
+    </device>
+    <device name="192.168.86.12">
+        <param name="hostname" value="adc2"/>
+        <param name="nsip" value="192.168.86.12"/>
+        <param name="datacenter" value="dc2"/>
+        <param name="group" value="group2"/>
+    </device>
+</properties>

@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Args",
+        "labelkey": "name",
+        "excludes": "ipv46, statechangetimeseconds, tickssincelaststatechange",
+        "bindingkey": ""
+    },
+    { 
+        "name": "Config1-lb", 
+        "insertvserveripport": "OFF", 
+        "ipv46": "192.168.0.100", 
+        "ippattern": "0.0.0.0", 
+        "ipmask": "*", 
+        "listenpolicy": "NONE", 
+        "ipmapping": "0.0.0.0", 
+        "port": 80, "range": "1", 
+        "servicetype": "HTTP", 
+        "type": "ADDRESS", 
+        "curstate": "DOWN", 
+        "effectivestate": "DOWN", 
+        "status": 1, 
+        "lbrrreason": 0
+    }
+]

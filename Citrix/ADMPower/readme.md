@@ -32,7 +32,10 @@ From there simply execute the script to load the startup form:
 <a name="startup"></a>
 ### Startup Parameters
 Once the script is executed, specify the ADM hostname and ADM user, and optionally check the 'Save Options' and/or 'Use HTTPS' checkboxes:<br>
+<br>
 <img src=".\images\startup.png"/>
+<br>
+If the 'Save Options' box is checked, these preferences will be saved in HKCU:\Software\Citrix\ADM.
 <a name="mainform"></a>
 ### Main Form
 Upon successfully connecting to an ADM host, the main form will load, which is divided into three panels:<br>
@@ -60,7 +63,7 @@ Clicking 'Edit > Preferences' allows you to modify the color settings for the ba
 <br>
 <img src=".\images\edit_preferences.png"/>
 <br>
-Color settings can be specified by hex, rgb, or color name, and applied by clicking the 'Apply' button:
+Color settings can be specified by hex, rgb, or color name, and applied by clicking the 'Apply' button, which saves the preferences to will be saved in HKCU:\Software\Citrix\ADM.:
 <br>
 <img src=".\images\colors.png"/>
 <a name="powertools"></a>

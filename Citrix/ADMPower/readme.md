@@ -158,10 +158,7 @@ When importing you'll be prompted to select a device profile, and all imported A
 <br>
 <a name="logviewer"></a>
 #### Log Viewer
-<br>
-<img src=".\images\log_viewer.png"/>
-<br>
-The log viewer gives ADM admins a quick and easy way to view the various logs that exposed in the Nitro APIs, including 
+The log viewer gives ADM admins a quick and easy way to view the various logs that are exposed in the Nitro APIs, including syslog, task, and device logs:
 <br>
 <img src=".\images\log_types.png"/>
 <br>

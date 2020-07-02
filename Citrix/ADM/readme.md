@@ -9,7 +9,7 @@ __Citrix Application Delivery Management Powershell Module__
 ## Module Introduction
 Citrix's Application Delivery Management (ADM) product is a linux-based Virtual appliance that serves as a centralized configuration management and analytics system for monitoring, analyzing, and maintaining Citrix Application Delivery Controllers (ADCs), which are formerly known as NetScalers.
 <br><br>
-![Overview](https://docs.citrix.com/en-us/citrix-application-delivery-management-software/12-1/media/adm-architecture.png)
+![Overview](https://docs.citrix.com/en-us/citrix-application-delivery-management-software/media/adm-architecture.png)
 <br><br>
 Citrix ADM & ADC appliances include an API SDK called [Nitro](https://www.citrix.com/community/citrix-developer/netscaler/nitro-sdk.html), which is implemented as a RESTful interface.
 This module provides a set of functions that are tailored for the Nitro REST interfaces to facilitate command line interaction with a target ADM host, as well as the ADCs that it manages, through the use of PowerShell cmdlets.

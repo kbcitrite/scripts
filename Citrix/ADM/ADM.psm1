@@ -75,7 +75,7 @@ function Disconnect-ADM
     .PARAMETER NSSession
         An existing custom ADM Neb Request Session object returned by Connect-ADM
     .EXAMPLE
-        DisConnect-ADM -ADMSession $Session
+        Disconnect-ADM -ADMSession $Session
     #>
     [CmdletBinding()]
     param (
@@ -175,7 +175,12 @@ Function Invoke-ADMNitro
     )
     Write-Verbose "$($MyInvocation.MyCommand): Enter"
     Write-Verbose "Building URI"
-    $uri = "$($ADMSession.Endpoint)/nitro/v1/$ApiType/$ResourceType"
+    $APIURL = "/nitro/v1"
+    if ($ResourceType -in @("stylebooks","configpacks","repositories"))
+    {
+        $APIURL = "/stylebook" + $APIURL
+    }
+    $uri = "$($ADMSession.Endpoint)$APIURL/$ApiType/$ResourceType" 
     if (-not [string]::IsNullOrEmpty($ResourceName))
     {
         $uri += "/$ResourceName"

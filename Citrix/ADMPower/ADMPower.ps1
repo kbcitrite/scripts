@@ -38,7 +38,7 @@
 [void][Reflection.Assembly]::Load('System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089') 
 [void][Reflection.Assembly]::Load('System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089')
 [void][Reflection.Assembly]::Load('System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
-[void][Reflection.Assembly]::load('System.DirectoryServices, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
+[void][Reflection.Assembly]::Load('System.DirectoryServices, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a')
 function Main {
     Param([String]$Commandline)
     if ((Show-MainForm) -eq 'OK')
@@ -654,14 +654,13 @@ function Add-ContextMenuItems ($TreeViewNode, [System.Windows.Forms.ContextMenu]
                             isDefaultSchedule ="true" 
                             mail_export	=	"false"
                             slack_export	= "false"
-                            description	=	($ParentName	+	" Config Template")
+                            description	=	($ParentName + " Config Template")
                         }
                         $CSVFile = XMLtoCSV -XmlFile $AnswerFile -OutCsv $AnswerFileName 
                         try 
                         {
                             $Upload = Invoke-ADMNitro -ADMSession $global:ADMSession -OperationMethod POST -APIType upload -ResourceType ns_configtemplate -InFile $CSVFile
-                            $Upload = Invoke-ADMNitro -ADMSession $global:ADMSession -OperationMethod POST -ResourceType ns_configtemplate -Payload
-                            $NSConfigTemplate
+                            $Upload = Invoke-ADMNitro -ADMSession $global:ADMSession -OperationMethod POST -ResourceType ns_configtemplate -Payload $NSConfigTemplate
                             if ($Upload.severity -eq "Error")
                             {
                                 Write-Log -Type "Error" -Line (Get-LineNumber) -Message "Unable to import $($ParentName): $($Upload.message)"
@@ -2514,12 +2513,18 @@ function Remove-BlankNodes ($treeView)
 }
 function Set-MainFormColor
 {
+    $DGVCellStyle.ForeColor = $global:FGColor 
+    $DGVCellStyle.BackColor = $global:BGColor
+    $DGVHeaderStyle.ForeColor = $global:FGColor
+    $DGVHeaderStyle.BackColor = $global:HeadingColor
     $menustrip1.BackColor = $global:HeadingColor
     $splitcontainer1.BackColor = $global:BGColor2 
     $formMain.BackColor = $global:BGColor
     $formMain.BackColor = $global:BGColor
     $ADMTreeView.BackColor = $global:BGColor
     $splitcontainer2.BackColor = $global:BGColor2
+    $splitcontainer2.Panel1.BackColor = $global:BGColor2
+    $splitcontainer2.Panel2.BackColor = $global:BGColor2
     $logToolStrip.BackColor = $global:HeadingColor
     $contextmenustrip1.BackColor = $global:HeadingColor
     $fileToolStripMenuItem.ForeColor = $global:FGColor
@@ -2544,12 +2549,12 @@ function Set-MainFormColor
     $configViewerToolStripMenuItem.ForeColor = $global:FGColor
     $checkoutADCsToolStripMenuItem.BackColor = $global:HeadingColor 
     $checkoutADCsToolStripMenuItem.ForeColor = $global:FGColor
-    $getADCResourcesToolStripMenuItem.BackColor = $global:HeadingColor
-    $DGVCellStyle.ForeColor = $global:FGColor 
-    $DGVCellStyle.BackColor = $global:BGColor
-    $DGVHeaderStyle.ForeColor = $global:FGColor
-    $DGVHeaderStyle.BackColor = $global:HeadingColor
-    $datagridviewResults.BackColor = $global:BGColor2
+    $getADCResourcesToolStripMenuItem.BackColor = $global:HeadingColor        
+    $tablelayoutpanel1.BackColor =     $global:BGColor2
+    $getADCResourcesToolStripMenuItem.ForeColor = $global:FGColor
+    $toolsToolStripMenuItem1.ForeColor = $global:FGColor
+    $datagridviewResults.GridColor = $global:FGColor
+    $logDataGridView.GridColor = $global:FGColor
 }
 function Start-ADMPower
 {    
@@ -3206,16 +3211,13 @@ function Show-MainForm
     $configViewerToolStripMenuItem = New-Object 'System.Windows.Forms.ToolStripMenuItem'
     $checkoutADCsToolStripMenuItem = New-Object 'System.Windows.Forms.ToolStripMenuItem'
     $getADCResourcesToolStripMenuItem = New-Object 'System.Windows.Forms.ToolStripMenuItem'
-    $InitialFormWindowState = New-Object 'System.Windows.Forms.FormWindowState'
-
+    $InitialFormWindowState = New-Object 'System.Windows.Forms.FormWindowState'    
+    
     $formMain.SuspendLayout()
     $tablelayoutpanel1.SuspendLayout()
     $splitcontainer1.SuspendLayout()
     $menustrip1.SuspendLayout()
-    $splitcontainer2.SuspendLayout()
-
-    # Set the colors 
-    Set-MainFormColor
+    $splitcontainer2.SuspendLayout()   
 
     $formMain.Controls.Add($tablelayoutpanel1)
     $formMain.AutoScaleDimensions = '6, 13'
@@ -3258,7 +3260,7 @@ function Show-MainForm
     $splitcontainer1.Dock = 'Fill'
     $splitcontainer1.Location = '3, 24'
     $splitcontainer1.Name = 'splitcontainer1'
-    [void]$splitcontainer1.panel1.Controls.Add($ADMTreeView)
+    [void]$splitcontainer1.Panel1.Controls.Add($ADMTreeView)
     [void]$splitcontainer1.Panel2.Controls.Add($splitcontainer2) 
     $splitcontainer1.Size = '736, 515' 
     $splitcontainer1.SplitterDistance = 117 
@@ -3311,6 +3313,8 @@ function Show-MainForm
     $splitcontainer2.Orientation = 'Horizontal'
     [void]$splitcontainer2.Panel1.Controls.Add($datagridviewResults)
     [void]$splitcontainer2.Panel2.Controls.Add($logDataGridView)
+    $splitcontainer2.Panel1.Name = "Panel1"        
+    $splitcontainer2.Panel2.Name = "Panel2"    
     $splitcontainer2.Size = '616, 515'
     $splitcontainer2.SplitterDistance = 330 
     $splitcontainer2.SplitterWidth = 5 
@@ -3321,7 +3325,6 @@ function Show-MainForm
     $datagridviewResults.DefaultCellStyle = $DGVCellStyle
     $datagridviewResults.Dock = 'Fill'
     $datagridviewResults.EnableHeadersVisualStyles = $False 
-    $datagridviewResults.GridColor = '150, 150, 150'
     $datagridviewResults.Location = '0, 0'
     $datagridviewResults.Margin = '2, 3, 2, 3'
     $datagridviewResults.Name = 'datagridviewResults'
@@ -3329,7 +3332,7 @@ function Show-MainForm
     $datagridviewResults.RowTemplate.Height = 24 
     $datagridviewResults.Size = '616, 330'
     $datagridviewResults.TabIndex = 1
-    $datagridviewResults.add_CellFormatting($datagridviewResults_CellFormatting) 
+    #$datagridviewResults.add_CellFormatting($datagridviewResults_CellFormatting) 
     $logDataGridView.AutoSizeColumnsMode = 'AllCells'
     $logDataGridView.ColumnHeadersDefaultCellStyle = $DGVHeaderStyle
     $logDataGridView.ColumnHeadersHeightSizeMode = 'AutoSize'
@@ -3340,7 +3343,7 @@ function Show-MainForm
     $logDataGridView.DefaultCellStyle = $DGVCellStyle
     $logDataGridView.Dock = 'Fill'
     $logDataGridView.EnableHeadersVisualStyles = $False 
-    $logDataGridView.GridColor = '150, 150, 150'
+    
     $logDataGridView.Location = '0, 0'
     $logDataGridView.Margin = '2, 3, 2, 3'
     $logDataGridView.Name = 'logDataGridView'
@@ -3400,8 +3403,7 @@ function Show-MainForm
     [void]$toolsToolStripMenuItem1.DropDownItems.Add($importDevicesToolStripMenuItem)
     [void]$toolsToolStripMenuItem1.DropDownItems.Add($logViewerToolStripMenuItem) 
 
-    $toolsToolStripMenuItem1.Font = $ToolStripFont 
-    $toolsToolStripMenuItem1.ForeColor = 'Info'
+    $toolsToolStripMenuItem1.Font = $ToolStripFont     
     $toolsToolStripMenuItem1.Name = 'toolsToolStripMenuItem1' 
     $toolsToolStripMenuItem1.Size = '45, 15'
     $toolsToolStripMenuItem1.Text = '&Tools'
@@ -3476,7 +3478,6 @@ function Show-MainForm
     $checkoutADCsToolStripMenuItem.add_MouseLeave($toolStripMenuItem_MouseLeave) 
     $checkoutADCsToolStripMenuItem.add_MouseHover($toolStripMenuItem_MouseHover)
     
-    $getADCResourcesToolStripMenuItem.ForeColor = $global:FGColor
     $getADCResourcesToolStripMenuItem.Name = 'getADCResourcesToolStripMenuItem' 
     $getADCResourcesToolStripMenuItem.Size = '170, 22' 
     $getADCResourcesToolStripMenuItem.Text = '&Get ADC Resources'
@@ -3484,6 +3485,9 @@ function Show-MainForm
 	$getADCResourcesToolStripMenuItem.add_MouseEnter($toolStripMenuItem_MouseHover) 
     $getADCResourcesToolStripMenuItem.add_MouseLeave($toolStripMenuItem_MouseLeave) 
     $getADCResourcesToolStripMenuItem.add_MouseHover($toolStripMenuItem_MouseHover)
+    
+    Set-MainFormColor
+
     $splitcontainer2.ResumeLayout()
     $menustrip1.ResumeLayout()
     $splitcontainer1.ResumeLayout()
@@ -4488,6 +4492,7 @@ function Show-Log-Viewer
     $splitcontainer2.Margin = '5, 5, 5, 5'
     $splitcontainer2.Name = 'splitcontainer2'
     $splitcontainer2.BackColor = $global:BGColor2
+    $splitcontainer2.ForeColor = $global:BGColor
     [void]$splitcontainer2.panel1.Controls.Add($logType)
     [void]$splitcontainer2.Panel2.Controls.Add($maxEvents)
     [void]$splitcontainer2.Panel2.Controls.Add($labelMaxResults)

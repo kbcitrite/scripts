@@ -83,6 +83,11 @@ function Disconnect-ADM
         [PSObject]$ADMSession
     )
     Write-Verbose "$($MyInvocation.MyCommand): Enter"
+    $Cookie = New-Object System.Net.Cookie
+    $Cookie.Name = "logged_in_user_name"
+    $Cookie.Value = $global:ADMUser
+    $Cookie.Domain = $DisconnectURI.DnsSafeHost
+    $ADMSession.WebSession.Cookies.Add($Cookie)
     try
     {
         Write-Verbose "Calling Invoke-RestMethod for logout"

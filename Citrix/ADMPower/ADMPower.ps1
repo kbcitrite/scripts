@@ -2519,8 +2519,7 @@ function Set-MainFormColor
     $DGVHeaderStyle.BackColor = $global:HeadingColor
     $menustrip1.BackColor = $global:HeadingColor
     $splitcontainer1.BackColor = $global:BGColor2 
-    $formMain.BackColor = $global:BGColor
-    $formMain.BackColor = $global:BGColor
+    $formMain.BackColor = $global:BGColor    
     $ADMTreeView.BackColor = $global:BGColor
     $splitcontainer2.BackColor = $global:BGColor2
     $splitcontainer2.Panel1.BackColor = $global:BGColor2
@@ -2550,11 +2549,13 @@ function Set-MainFormColor
     $checkoutADCsToolStripMenuItem.BackColor = $global:HeadingColor 
     $checkoutADCsToolStripMenuItem.ForeColor = $global:FGColor
     $getADCResourcesToolStripMenuItem.BackColor = $global:HeadingColor        
-    $tablelayoutpanel1.BackColor =     $global:BGColor2
+    $tablelayoutpanel1.BackColor = $global:BGColor2
     $getADCResourcesToolStripMenuItem.ForeColor = $global:FGColor
     $toolsToolStripMenuItem1.ForeColor = $global:FGColor
     $datagridviewResults.GridColor = $global:FGColor
-    $logDataGridView.GridColor = $global:FGColor
+    $logDataGridView.GridColor = $global:FGColor    
+    $datagridviewResults.BackgroundColor = $global:BGColor2
+    $logDataGridView.BackgroundColor = $global:BGColor2
 }
 function Start-ADMPower
 {    
@@ -3265,9 +3266,7 @@ function Show-MainForm
     $splitcontainer1.Size = '736, 515' 
     $splitcontainer1.SplitterDistance = 117 
     $splitcontainer1.SplitterWidth = 3 
-    $splitcontainer1.TabIndex = 9     
-
-    
+    $splitcontainer1.TabIndex = 9      
 
     $menustrip1.ImageScalingSize = '20, 20'
     [void]$menustrip1.Items.Add($fileToolStripMenuItem)
@@ -3332,7 +3331,7 @@ function Show-MainForm
     $datagridviewResults.RowTemplate.Height = 24 
     $datagridviewResults.Size = '616, 330'
     $datagridviewResults.TabIndex = 1
-    #$datagridviewResults.add_CellFormatting($datagridviewResults_CellFormatting) 
+    $datagridviewResults.add_CellFormatting($datagridviewResults_CellFormatting) 
     $logDataGridView.AutoSizeColumnsMode = 'AllCells'
     $logDataGridView.ColumnHeadersDefaultCellStyle = $DGVHeaderStyle
     $logDataGridView.ColumnHeadersHeightSizeMode = 'AutoSize'

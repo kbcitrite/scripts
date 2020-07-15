@@ -3221,7 +3221,7 @@ function Show-MainForm
     $splitcontainer2.SuspendLayout()   
 
     $formMain.Controls.Add($tablelayoutpanel1)
-    $formMain.AutoScaleDimensions = '6, 13'
+    $formMain.AutoScaleDimensions = '8.5, 15'
     $formMain.AutoScaleMode = 'Font'
     $formMain.AutoValidate = 'EnableAllowFocusChange'
     

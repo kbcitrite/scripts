@@ -161,7 +161,7 @@ $NitroColumns = @{
     task_device_log	=	@("starttime","device_user","ip_address","status","task_id")
     task_command_log	=	@("starttime",	"command", "task_device_id", "protocol",	"statusmessage", "status")
     task_log	=	@("starttime",	"name", "executed_by", "status", "id")
-    vpnvserver  = @("name", "ipv46", "port", "servicetype", "curstate"."authentication", "icaonly", "dtls", "curaaausers", "appflowlog", "httpprofilename")
+    vpnvserver  = @("name", "ipv46", "port", "servicetype", "curstate","authentication", "icaonly", "dtls", "curaaausers", "appflowlog", "httpprofilename")
 }
 $LogView = @("Time","Line","Message")
 # TreeView Structure: Each of the following hashtables will be used to create the left-hand TreeView 
@@ -1210,7 +1210,7 @@ function ConvertTo-DataTable
                     break
                 }
             }
-            if ($null -eq $object) { return } #A11 null then empty
+            if ($null -eq $object) { return } 
             foreach ($Column in $Includes)
             {
                 $prop = $object.PSObject.Properties[$Column] 
@@ -1221,7 +1221,7 @@ function ConvertTo-DataTable
                         Value	= ""
                     }    
                 }            
-                if (-not $FilterWMIProperties -or -not $prop.Name.StartsWith('__')) #filter out WMI properties
+                if (-not $FilterWMIProperties -or -not $prop.Name.StartsWith('__'))
                 {
                     $type = $null
                     if ($null -ne $prop.Value -and $Column -ne "commands")
@@ -4437,8 +4437,8 @@ function Show-Log-Viewer
     $formMain.BackColor = $global:BGColor
     $tablelayoutpanel1.Controls.Add($splitcontainer1, 0, 1)
     $tablelayoutpanel1.ColumnCount = 1
-    $System_Windows_Forms_ColumnStyle_l = New-Object 'System.Windows.Forms.ColumnStyle' ('Absolute', 1708) 
-    [void]$tablelayoutpanel1.ColumnStyles.Add($System_Windows_Forms_ColumnStyle_l)
+    $System_Windows_Forms_ColumnStyle_1 = New-Object 'System.Windows.Forms.ColumnStyle' ('Absolute', 1708) 
+    [void]$tablelayoutpanel1.ColumnStyles.Add($System_Windows_Forms_ColumnStyle_1)
     $tablelayoutpanel1.Dock = 'Fill'
     $tablelayoutpanel1.Location = '0, 0'
     $tablelayoutpanel1.Margin = '5, 5, 5, 5'

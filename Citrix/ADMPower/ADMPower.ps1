@@ -4506,7 +4506,7 @@ function Show-Log-Viewer
     $splitcontainer2.SplitterWidth = 1 
     $splitcontainer2.TabIndex = 0 
     $logType.Dock = 'Fill'
-    $logType.Font = "$TypeFace, 8pt, style=Italic"
+    $logType.Font = $FontStyle
     $logType.FormattingEnabled = $True 
     $logType.Location = '0, 0'
     $logType.Margin = '5, 5, 5, 5'
@@ -4544,7 +4544,8 @@ function Show-Log-Viewer
     $buttonRefresh.add_Click($buttonRefresh_Click)
     $buttonRefresh.ForeColor = $global:HeadingColor
     $labelTotalEvents.AutoSize = $True
-    $labelTotalEvents.Font = "$TypeFace, 8pt, style=Bold"
+    $labelTotalEvents.ForeColor = $global:FGColor
+    $labelTotalEvents.Font = $FontStyle
     $labelTotalEvents.Location = '375, 10'
     $labelTotalEvents.Margin = '5, 0, 5, 0'
     $labelTotalEvents.Name = 'labelTotalEvents'
@@ -4553,6 +4554,7 @@ function Show-Log-Viewer
     $labelTotalEvents.Text = 'Total Events:'
     $labelTotalEvents.UseCompatibleTextRendering = $True 
     $totalEvents.AutoSize = $True 
+    $totalEvents.ForeColor = $global:FGColor
     $totalEvents.Location = '500, 10'
     $totalEvents.Margin = '5, 0, 5, 0'
     $totalEvents.Name = 'totalEvents'
@@ -4566,6 +4568,8 @@ function Show-Log-Viewer
     $progressbar1.TabIndex = 9 
     $progressbar1.Visible = $False 
     $labelMaxResults.AutoSize = $True 
+    $labelMaxResults.Font = $FontStyle
+    $labelMaxResults.ForeColor = $global:FGColor
     $labelMaxResults.Location = '545, 10'
     $labelMaxResults.Margin = '5, 0, 5, 0' 
     $labelMaxResults.Name = 'labelMaxResults' 

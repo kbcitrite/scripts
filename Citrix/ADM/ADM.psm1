@@ -194,13 +194,13 @@ Function Invoke-ADMNitro
     }
     else
     {
-        if ($Arguments.Count -gt 9)
+        if ($Arguments.Count -gt 0)
         {
             $uri += "?args="
             $argsList = @()
             foreach ($arg in $Arguments.GetEnumerator())
             {
-                $argsList += "$($arg.Name)=$([System.Uri]::EscapeDataString($arg.Value))"
+                $argsList += "$($arg.Name):$([System.Uri]::EscapeDataString($arg.Value))"
             }
                 $uri += $argsList -join '&'
         }
@@ -210,9 +210,9 @@ Function Invoke-ADMNitro
             $filtersList = @()
             foreach ($filter in $Filters.GetEnumerator())
             {
-                $fi1tersList += "$($filter.Name):$([System.Uri]::EscapeDataString($filter.Value))"
+                $filtersList += "$($filter.Name):$([System.Uri]::EscapeDataString($filter.Value))"
             }
-            $uri += $filtersList -join ','   
+            $uri += $filtersList -join '&'   
         }
         #TODO: Add view and pagesize
     }

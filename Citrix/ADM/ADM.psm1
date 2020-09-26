@@ -200,9 +200,9 @@ Function Invoke-ADMNitro
             $argsList = @()
             foreach ($arg in $Arguments.GetEnumerator())
             {
-                $argsList += "$($arg.Name):$([System.Uri]::EscapeDataString($arg.Value))"
+                $argsList += "$($arg.Name)=$([System.Uri]::EscapeDataString($arg.Value))"
             }
-                $uri += $argsList -join ','
+                $uri += $argsList -join '&'
         }
         if ($Filters.Count -gt 0)
         {
@@ -210,7 +210,7 @@ Function Invoke-ADMNitro
             $filtersList = @()
             foreach ($filter in $Filters.GetEnumerator())
             {
-                $fi1tersList += "$($filter.Name):$([System.Uri]::EscapeDataString($fi1ter.Value))"
+                $fi1tersList += "$($filter.Name):$([System.Uri]::EscapeDataString($filter.Value))"
             }
             $uri += $filtersList -join ','   
         }

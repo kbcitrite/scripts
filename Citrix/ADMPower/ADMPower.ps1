@@ -6133,7 +6133,7 @@ function Show-GetADCResources
             {
                 if ($global:Cancel -eq $false)
                 {
-                    foreach ($Object in $RunningCollection.$ADC.$ResourceType)
+                    foreach ($Object in $RunningCollection.$ADC.$ResourceType | Where-Object {$_ -ne $null)
                     {
                         foreach ($Key in ($Object | Convert-ObjectToHash).Keys)
                         {

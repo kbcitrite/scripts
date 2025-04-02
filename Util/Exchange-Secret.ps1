@@ -167,7 +167,8 @@ $encryptButton.Add_Click({
             [System.Windows.Forms.MessageBox]::Show("Please enter both a secret and a passphrase.", "Error", "OK", "Error")
             return
         }
-        $encryptedstring = Get-EncryptedString -StringToEncrypt $secret -PresharedSecret $passphrase Set-Clipboard -Value $encryptedstring
+        $encryptedstring = Get-EncryptedString -StringToEncrypt $secret -PresharedSecret $passphrase 
+        Set-Clipboard -Value $encryptedstring
         $encryptResultLabel.Text = "Encrypted string copied to clipboard."
     }
     catch {
@@ -230,7 +231,8 @@ $decryptButton.Add_Click({
             [System.Windows.Forms.MessageBox]::Show("Please enter both an encrypted secret and a passphrase.", "Error", "OK", "Error") 
             return
         }
-        $decryptedString = Get-DecryptedString -EncryptedText $encryptedSecret -PresharedSecret $passphrase Set-Clipboard -Value $decryptedString
+        $decryptedString = Get-DecryptedString -EncryptedText $encryptedSecret -PresharedSecret $passphrase 
+        Set-Clipboard -Value $decryptedString
         $decryptResultLabel.Text = "Decrypted string copied to clipboard."
     }
     catch {

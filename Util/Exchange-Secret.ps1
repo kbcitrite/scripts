@@ -51,7 +51,8 @@ function Get-DecryptedString {
     $key = [System.Text.Encoding]::UTF8.GetBytes($PresharedSecret.PadRight(32, ' ').Substring(0, 32))
     #Convert the encrypted text from a base64 string to a byte array
     $encryptedBytes = [Convert]::FromBase64String($EncryptedText)
-    #Extract the IV from the encrypted bytes $iv = $encryptedBytes[0..15]
+    #Extract the IV from the encrypted bytes 
+    $iv = $encryptedBytes[0..15]
     #Extract the actual encrypted data
     $cipherBytes = $encryptedBytes[16..($encryptedBytes.Length - 1)]
     #Create an AES object

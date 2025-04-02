@@ -250,6 +250,7 @@ $form.Controls.Add($closeButton)
 $closeButton.Add_Click({
     $form.Close()
 })
-#endregion #region Main
+#endregion 
+#region Main
 $form.ShowDialog()
 #endregion

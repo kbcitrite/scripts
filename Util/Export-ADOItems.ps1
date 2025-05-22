@@ -20,15 +20,14 @@ foreach ($workItemId in $workItemIds) {
         New-Item -Path "$OutPath\$workItemId" -ItemType Directory -Force | Out-Null
     }
     $workItemUrl = "https://dev.azure.com/$Organization/$Project/_apis/wit/workitems/$($workItemId)?`$expand=Relations&api-version=6.9"
-    $workItemResponse = Invoke-RestMethod -Uri $workItemUrl -Method Get -Headers $headers 
+    $workItemResponse = Invoke-RestMethod -Uri $workItemUrl -Method Get -Headers $headers
     if ($null -ne $workItemResponse.relations) {
-        if ($null -ne $attachmentResponse) {
-            foreach ($attachment in $workItemResponse.relations | Where-Object { $_.rel -eq "AttachedFile" }) {
-                $attachmentUrl = $attachment.uri
-                $attachmentResponse = Invoke-RestMethod -Uri $attachmentUrl -Method Get -Headers $headers -OutFile "$OutPath\$workItemId\$($attachment.attributes.name)"
-            }
+        foreach ($attachment in $workItemResponse.relations | Where-Object { $_.rel -eq "AttachedFile" }) {
+            $attachmentUrl = $attachment.url
+            Invoke-RestMethod -Uri $attachmentUrl -Method Get -Headers $headers -OutFile "$OutPath\$workItemId\$($attachment.attributes.name)"
         }
     }
+    
     [PSCustomObject]@{
         AssignedTo  = $workItemResponse.fields.'System.AssignedTo'
         Title       = $workItemResponse.fields.'System.Title'

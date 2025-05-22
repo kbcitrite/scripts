@@ -23,8 +23,7 @@ foreach ($workItemId in $workItemIds) {
     $workItemResponse = Invoke-RestMethod -Uri $workItemUrl -Method Get -Headers $headers
     if ($null -ne $workItemResponse.relations) {
         foreach ($attachment in $workItemResponse.relations | Where-Object { $_.rel -eq "AttachedFile" }) {
-            $attachmentUrl = $attachment.url
-            Invoke-RestMethod -Uri $attachmentUrl -Method Get -Headers $headers -OutFile "$OutPath\$workItemId\$($attachment.attributes.name)"
+            Invoke-RestMethod -Uri $attachment.url -Method Get -Headers $headers -OutFile "$OutPath\$workItemId\$($attachment.attributes.name)"
         }
     }
     
